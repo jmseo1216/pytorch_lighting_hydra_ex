@@ -1,0 +1,25 @@
+data:
+  data_dir: ./CIFAR10_DATASET
+  batch_size: 64
+  valid_split: 0.2
+model:
+  model:
+    model_name: simple_cnn
+    num_classes: 10
+    dropout_ratio: 0.2
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.001
+  weight_decay: 0.0001
+scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 10
+  gamma: 0.5
+callback:
+  monitor: valid_loss
+  mode: min
+  patience: 3
+  logging_interval: epoch
+trainer:
+  max_epochs: 100
+  accelerator: auto
